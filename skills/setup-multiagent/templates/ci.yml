@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Several Claude sessions push concurrently, so superseded PR runs are cancelled
+# per-branch rather than left burning minutes on stale commits. Pushes to main
+# queue instead of cancelling — a future deploy job must never be cut off
+# mid-flight. Deploy jobs added later keep cancel-in-progress false.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  # A narrow-but-real gate for a repo whose application stack doesn't exist yet:
+  # it validates the merge-gate config itself, so a malformed file fails the build
+  # rather than silently disarming the queue every other guardrail depends on.
+  # Only for the Mergify tier — on other tiers, replace with the stack's test job.
+  # When a test suite lands, add its job here AND to the merge gate's conditions.
+  config:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml
+      - name: Validate .mergify.yml parses and defines the queue rule
+        run: |
+          python - <<'PY'
+          import sys, yaml
+
+          with open(".mergify.yml") as handle:
+              config = yaml.safe_load(handle)
+
+          queues = {rule["name"] for rule in config.get("queue_rules", [])}
+          if "default" not in queues:
+              sys.exit(".mergify.yml defines no 'default' queue rule — merges would not queue")
+
+          labels = {
+              condition
+              for rule in config.get("pull_request_rules", [])
+              for condition in rule.get("conditions", [])
+          }
+          if "label=queue" not in labels:
+              sys.exit(".mergify.yml has no rule entered by label=queue — the queue label would do nothing")
+
+          print("mergify config OK: 'default' queue rule present, entered by label=queue")
+          PY

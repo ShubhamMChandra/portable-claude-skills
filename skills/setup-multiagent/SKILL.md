@@ -37,8 +37,9 @@ If the stack isn't established yet, say so and set CI up the moment it is — do
 invent a passing no-op job that fakes a green signal.
 
 Every workflow gets a concurrency group. This is the cheapest fix for the CI-cost
-blowup that N parallel sessions cause (GitHub Actions syntax shown; other CI systems
-have equivalents):
+blowup that N parallel sessions cause — start from
+[templates/ci.yml](templates/ci.yml) (GitHub Actions; other CI systems have
+equivalents):
 
 ```yaml
 concurrency:
@@ -65,7 +66,13 @@ it lands. Pick the first tier available on this host; don't assume — check.
    catches the stale-base class.
 3. **Mergify free tier** (personal private repos on GitHub Free, ≤5 contributors) —
    a real queue where GitHub sells none. **Skip on company remotes**: third-party
-   apps with write access usually violate policy; don't propose it there.
+   apps with write access usually violate policy; don't propose it there. Start
+   from [templates/mergify.yml](templates/mergify.yml) — entered by a `queue`
+   label so merging stays an explicit act (`gh label create queue`), and never
+   list a path-filtered job in `merge_conditions` (it doesn't run on every PR,
+   so the queue waits forever). The app install is the user's click
+   (https://github.com/apps/mergify); confirm it landed by watching for
+   Mergify's config check on the first PR — don't take silence as success.
 4. **Coordinator-serialized merges** — the zero-dependency fallback that works
    everywhere: the `coordinate` session merges one PR at a time, waits for main CI,
    and has every open branch re-verify against the new head before the next merge.
@@ -76,13 +83,18 @@ coordinator) — never merge-on-green by default.
 
 ## Step 4 — Project CLAUDE.md
 
-Append a "Multi-session work" section stating: one worktree per session (never develop
-in the main checkout while peers are active); this repo's **overlap zones** (auth,
-migrations, config, API contracts, pinned prompts, routing/registry files) which force
-human review; any **shared counters** (numbered migrations, codegen indexes) and the
-rule that a session announces its claimed number to peers; and the CI cancellation
-behavior. Keep the repo-specific facts here — the universal rules live in
-`multiagent-conventions`.
+Append a "Multi-session work" section — start from
+[templates/CLAUDE-multi-session.md](templates/CLAUDE-multi-session.md) — stating:
+one worktree per session (never develop in the main checkout while peers are
+active); this repo's **overlap zones** (auth, migrations, config, API contracts,
+pinned prompts, routing/registry files) which force human review; any **shared
+counters** (numbered migrations, codegen indexes) and the rule that a session
+announces its claimed number to peers; and the CI cancellation behavior. Keep the
+repo-specific facts here — the universal rules live in `multiagent-conventions`.
+
+Also drop in [templates/pull_request_template.md](templates/pull_request_template.md)
+as `.github/pull_request_template.md`: what changed / why / how to verify, with the
+merge-gate reminder in the footer.
 
 ## Step 5 — Guard the shared counters in CI
 

@@ -1,0 +1,32 @@
+# Mergify merge queue — the serialized-merge gate for concurrent sessions.
+#
+# Flow: add the `queue` label to a PR. Mergify updates it against the REAL current
+# main, re-runs CI on that combined tree, and squash-merges only if that run is
+# green. Per-PR CI cannot do this: two PRs green in isolation say nothing about
+# their composition, which is the failure mode that actually bites parallel work.
+#
+# The label is the approval boundary on purpose — "ready to merge" is a
+# notification, not an action. Nothing queues without someone attaching it.
+#
+# merge_conditions lists the always-on CI jobs that must pass on the updated tree.
+# Never list a path-filtered job — it does not run on every PR, so the queue would
+# wait forever. `config` is the only gate until an application stack exists; add the
+# test job here the moment there is one, or the queue merges unverified code.
+
+queue_rules:
+  - name: default
+    merge_method: squash
+    queue_conditions:
+      - label=queue
+      - -draft
+    merge_conditions:
+      - check-success=config
+
+pull_request_rules:
+  - name: enter the merge queue when labeled
+    conditions:
+      - label=queue
+      - -draft
+    actions:
+      queue:
+        name: default
