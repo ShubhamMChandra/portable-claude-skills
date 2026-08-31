@@ -89,6 +89,31 @@ For each PR with failing or pending checks:
   Squash-merged branches won't `-d`; verify they're merged (`gh pr view`) before any
   forced cleanup, and prefer leaving them to a dedicated cleanup pass.
 
+## Cockpit mode — when the user delegates the whole build
+
+The steps above assume peer sessions already exist and the coordinator only holds
+the map. When the user instead hands you an approved plan and wants one session to
+drive it end to end, the coordinator becomes the cockpit — it also *spawns and
+manages* the work:
+
+- **Spawn executors, don't implement.** Dispatch one worktree-isolated agent per
+  plan task or workstream (see `multiagent-conventions` → Spawning parallel work);
+  the cockpit's own context stays reserved for orchestration and judgment.
+- **Review agent-side.** Route every executor's diff to an independent reviewer
+  agent that didn't write the code, before CI, before the merge gate. If the user
+  doesn't read diffs, this review is the only design gate — treat it as mandatory,
+  and summarize its verdict in plain English.
+- **Work under batch authorizations.** Ask for approval in batches the user can
+  reason about ("these four PRs as they go green"), not per-diff — a per-PR gate
+  gives a non-reviewing user no information they can act on. Outward actions
+  beyond the authorized batch still stop and ask.
+- **Report outcomes, not internals.** The user's review surface is things they can
+  judge: plan docs in plain English, rendered pages, running behavior, metrics
+  against agreed thresholds. Give clickable or runnable checks, never file:line.
+- **Pull the user in only for what is theirs:** taste and design verdicts, spend
+  and account decisions, batch authorizations, and go/no-go calls at the plan's
+  stated thresholds.
+
 ## Hard rules
 
 - Never force-push. A rejected normal push = stop and surface it.
