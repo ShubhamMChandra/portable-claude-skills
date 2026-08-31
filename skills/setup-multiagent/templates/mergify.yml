@@ -1,4 +1,7 @@
 # Mergify merge queue — the serialized-merge gate for concurrent sessions.
+# TIER 3 ONLY (personal private repos on GitHub Free). Skip this file entirely on
+# company remotes or wherever a native merge queue / branch protection exists —
+# see Step 3 of the setup-multiagent skill for the tier ladder.
 #
 # Flow: add the `queue` label to a PR. Mergify updates it against the REAL current
 # main, re-runs CI on that combined tree, and squash-merges only if that run is

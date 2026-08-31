@@ -14,11 +14,29 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  # A narrow-but-real gate for a repo whose application stack doesn't exist yet:
-  # it validates the merge-gate config itself, so a malformed file fails the build
-  # rather than silently disarming the queue every other guardrail depends on.
-  # Only for the Mergify tier — on other tiers, replace with the stack's test job.
-  # When a test suite lands, add its job here AND to the merge gate's conditions.
+  # The always-on gate: fill in the repo's real test commands (detect the stack
+  # from lockfiles — pytest / vitest / go test / cargo test — never a no-op that
+  # fakes green). This is the job the merge gate requires, whichever tier Step 3
+  # chose: a required check in a native merge queue or branch protection, a
+  # merge_condition in Mergify, or what the coordinator waits on between
+  # serialized merges. Keep it un-path-filtered so it runs on every PR.
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # - uses: actions/setup-<runtime>@vN
+      # - run: <install dependencies>
+      # - run: <run the test suite>
+      - run: echo "REPLACE ME with the stack's test commands" && exit 1
+
+  # ------------------------------------------------------------------------
+  # DELETE THIS JOB unless the repo uses the Mergify tier (personal private
+  # repos on GitHub Free). It's a narrow-but-real gate for a repo whose stack
+  # doesn't exist yet: it validates the merge-gate config itself, so a malformed
+  # file fails the build rather than silently disarming the queue every other
+  # guardrail depends on. When a test suite lands, add its job to Mergify's
+  # merge_conditions alongside this one.
+  # ------------------------------------------------------------------------
   config:
     runs-on: ubuntu-latest
     steps:
