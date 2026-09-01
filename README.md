@@ -9,7 +9,7 @@ on a work machine.
 
 | Skill | Use it when |
 |---|---|
-| [`coordinate`](skills/coordinate/SKILL.md) | Several Claude Code sessions work one repo and you want one session to hold the board — sessions, branches, PRs, CI, merge order — and babysit what's in flight. Run once or on a loop (`/loop 10m /coordinate`). |
+| [`coordinate`](skills/coordinate/SKILL.md) | Several Claude Code sessions work one repo and you want one session to hold the board — sessions, branches, PRs, CI, merge order — and babysit what's in flight. Run once or on a loop (`/loop 10m /coordinate`). Includes [cockpit operations](skills/coordinate/references/cockpit-operations.md) — crew profiles, spawn mechanics, permission-overlay [templates](skills/coordinate/templates/), lane watchers, and a field-verified stall inventory — for fully delegated multi-session builds. |
 | [`setup-multiagent`](skills/setup-multiagent/SKILL.md) | One-time bootstrap of a repo for safe parallel sessions: CI with concurrency groups, a merge gate matched to what your git host actually offers, worktree conventions, counter guards. Ships copyable [templates](skills/setup-multiagent/templates/) (CI workflow, merge-queue config, PR template, CLAUDE.md section) taken from a real scaffolded repo. |
 | [`multiagent-conventions`](skills/multiagent-conventions/SKILL.md) | The universal rules every session follows: trunk-based git, worktree-per-session, overlap zones, shared-counter claims, re-verify after merge, concurrency cap. |
 | [`teach-me`](skills/teach-me/SKILL.md) | Explaining complex topics so the user learns them, not just approves them — short-sentence style (loosely ASD-STE100) plus the four practices that actually teach. |
