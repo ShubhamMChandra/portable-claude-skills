@@ -114,6 +114,12 @@ manages* the work:
   and account decisions, batch authorizations, and go/no-go calls at the plan's
   stated thresholds.
 
+Running a cockpit for real — crew profiles, spawn mechanics, permission
+overlays, lane watchers, the authority ledger, and the verified stall
+inventory — is documented in
+[references/cockpit-operations.md](references/cockpit-operations.md), with
+copyable overlays and the watcher script in [templates/](templates/).
+
 ## Hard rules
 
 - Never force-push. A rejected normal push = stop and surface it.
