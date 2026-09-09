@@ -17,6 +17,12 @@ on a work machine.
 `coordinate` and `setup-multiagent` are the runtime and setup halves of the same
 system; `multiagent-conventions` is the doctrine both assume.
 
+### Agents
+
+| Agent | Use it when |
+|---|---|
+| [`instructor`](agents/instructor.md) | You want to be taught, not told: framework first, then the story of why it matters, then Socratic questions and a real exercise in your own context. Meets the learner at their level (executive, manager, IC, beginner), corrects gaps plainly, no filler praise. Pairs with `teach-me` for the written explanations. |
+
 ## Install
 
 Copy the skills into your user-level Claude Code skills directory:
@@ -27,6 +33,12 @@ cp -r portable-claude-skills/skills/* ~/.claude/skills/
 ```
 
 Or into a single project instead: `cp -r skills/* <repo>/.claude/skills/`.
+
+Agents go alongside them:
+
+```bash
+cp -r portable-claude-skills/agents/* ~/.claude/agents/
+```
 
 Claude Code picks them up on the next session. Invoke by name (`/coordinate`) or
 let Claude auto-select them from the descriptions.

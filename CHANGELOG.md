@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-09
+
+- Adds the `instructor` agent: a framework-first, Socratic tutor persona that
+  teaches by context -> concept -> connection -> application, calibrates to the
+  learner's level, and pressure-tests understanding. Its resources section is
+  made portable (no paths outside this repo).
+
 ## 2026-08
 
 - Ships four portable skills: `coordinate`, `setup-multiagent`,
