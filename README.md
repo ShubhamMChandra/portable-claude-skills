@@ -16,7 +16,7 @@ menu in the session title bar → Edit → Setup script) and every new session i
 that environment gets everything below, whatever repo it opens:
 
 ```bash
-git clone --depth 1 https://github.com/ShubhamMChandra/portable-claude-skills /tmp/pcs && bash /tmp/pcs/install.sh
+rm -rf /tmp/pcs && git clone --depth 1 https://github.com/ShubhamMChandra/portable-claude-skills /tmp/pcs && bash /tmp/pcs/install.sh
 ```
 
 It takes about five seconds.
