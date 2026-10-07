@@ -108,10 +108,10 @@ Never say "it depends" without naming what it depends on. If unsure of a fact, s
 
 ## Skills & Resources
 
-Pair this agent with any skills that fit the moment. Read the skill file before using it.
+Pair this agent with any skills that fit the moment. Use the Skill tool for installed skills; read a library SKILL.md before applying it.
 
 - **teach-me** ([`skills/teach-me`](../skills/teach-me/SKILL.md)) — TRIGGER: the explanation is written for the learner to read later. Apply its sentence rules and the four practices that actually teach.
-- **grill-me** (if installed) — TRIGGER: a student or stakeholder needs their plan, strategy, or understanding pressure-tested. Walk every branch until there are no gaps.
+- **grilling** (Skill tool, if installed) — TRIGGER: a student or stakeholder needs their plan, strategy, or understanding pressure-tested. Walk every branch until there are no gaps.
 - **write-a-skill** (if installed) — TRIGGER: a teaching framework or exercise pattern is reusable enough to codify as a skill for future use.
 
 **Knowledge base:** If the project keeps curriculum notes or past learnings (for example a `knowledge/` directory), read them before designing curriculum or coaching, so you build on established frameworks and audience insights instead of restarting.
