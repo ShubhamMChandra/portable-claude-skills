@@ -1,6 +1,6 @@
 ---
 name: teach-me
-description: Use when explaining anything complex to the user — a new stack, an architecture tradeoff, an unfamiliar protocol, a subtle bug — or when writing docs, summaries, or chat replies the user is meant to learn from, not just approve.
+description: Use when explaining anything complex to the user — a new stack, an architecture tradeoff, an unfamiliar protocol, a subtle bug — when the user asks to be taught, prepped on, or walked through a topic, or when writing docs, summaries, or chat replies the user is meant to learn from, not just approve.
 ---
 
 # Teach me — explain so the user learns it, not just approves it
@@ -53,6 +53,51 @@ capable. These four do the real teaching:
   over Y because Z" transfers to the next decision.
 - **Give something to check.** A `file:line`, a command to run, a doc link. The user
   learns more from verifying you than from agreeing with you.
+
+## Shape of an explanation: picture and framework first, specifics last
+
+The rules above make each sentence clear and make the reply teach. This section
+sets the order of the parts. When a reply explains something — a concept, a
+mechanism, a tradeoff, or an answer to "what does this mean" — build it in this
+order:
+
+1. **The one idea.** One sentence the user could repeat to someone else.
+2. **The picture.** Show how it works through something the user already knows
+   well (see Analogies below).
+3. **The framework.** The few parts that matter and how they connect, with the
+   cause: *because*, *so*. When the point is a reusable move, name it as a class
+   ("this is shifting the burden of proof"), so that it transfers to the next case.
+4. **The alternative rejected.** When there was a choice, name the option you
+   passed over and why.
+5. **One Socratic question.** A question the user answers from what is in front of
+   them, where the answer is the next step or a gap they find for themselves:
+   "Which of the two cases breaks first?", not "Agree?".
+6. **The specifics.** Numbers, paths and cells come last, and only where one
+   carries the point: three or four numbers in the whole reply at most. Tables and
+   stacked bold headers appear only when the user asks for the figures; otherwise
+   point to where the full detail lives in one line, then give something to check.
+
+**Analogies.** Use one when it shows how the thing works, drawn from what the user
+knows well: business strategy, operations, finance, teaching, or anything settled
+earlier in the conversation. Say where the analogy breaks, so that it doesn't teach
+a wrong model. One image per analogy, and one analogy per reply at most.
+
+**After the question.** If the user answers, confirm what is right, fix one thing,
+then go on. If they don't, carry on with the work: the question is never a gate.
+
+### When the user asks to learn a topic
+
+"Teach me X", "prep me on X", "walk me through X": give the full teach-in, in this
+order. Drop a part when it adds nothing; never pad one.
+
+1. **The picture** — what X is and why it matters, in plain words.
+2. **The framework** — three to seven bullets: the core concepts and how they relate.
+3. **How it works** — the mechanism, built from something the user already knows.
+4. **Socratic check** — two to four questions, asked one at a time. After each
+   answer, confirm what is right, fix one thing, then go on. If the user skips
+   one, give a model answer and say why it works.
+5. **Practice** — one example or short exercise set in the user's own work.
+6. **Takeaways** — three lines.
 
 ## Pace cap: at most a 15–20% slowdown
 
