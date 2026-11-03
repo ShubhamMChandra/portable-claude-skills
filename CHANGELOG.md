@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-11
+
+- `teach-me` folds in the framework-first, Socratic parts of the `instructor`
+  agent: a set order for explanations (one idea, picture, framework, rejected
+  alternative, one Socratic question, specifics last), a rule for analogies,
+  and a full teach-in shape for "teach me X" requests. Its description now
+  triggers on those requests.
+
 ## 2026-10
 
 - Adds `install.sh`: one command installs this repo's skills and agents into
