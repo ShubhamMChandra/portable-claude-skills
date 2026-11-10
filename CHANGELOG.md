@@ -7,6 +7,8 @@
   single queue of Decide and Review items, guarded by a non-author cold read, a
   stated default on silence, and one ready-to-read drop. Includes a documents
   mode for repos with no PRs or CI, and a worker brief template.
+- `coordinate` adds `XO-GUIDE.md`: setup steps, a paste-in `CLAUDE.md` block,
+  and a kickoff prompt for the XO session.
 - `teach-me` folds in the framework-first, Socratic parts of the `instructor`
   agent: a set order for explanations (one idea, picture, framework, rejected
   alternative, one Socratic question, specifics last), a rule for analogies,

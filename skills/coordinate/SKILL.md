@@ -132,6 +132,8 @@ drop after the checks. It also has a documents mode for repos with no PRs or CI.
 
 The full protocol is in [references/xo-protocol.md](references/xo-protocol.md);
 the worker brief is [templates/worker-brief.md](templates/worker-brief.md).
+To set it up on a new project (CLAUDE.md block and kickoff prompt), see
+[XO-GUIDE.md](XO-GUIDE.md).
 
 ## Hard rules
 
