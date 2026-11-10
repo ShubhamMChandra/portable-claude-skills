@@ -120,6 +120,19 @@ inventory — is documented in
 [references/cockpit-operations.md](references/cockpit-operations.md), with
 copyable overlays and the watcher script in [templates/](templates/).
 
+## XO mode — one voice to the user
+
+When the user feels swamped by several sessions asking them things, make this
+session the **XO**: the only session that talks to the user. Every other session
+is a worker (writes only its own folder, reports to the XO) or a thinking session
+(writes nothing). The user sees one queue of Decide and Review items, each naming
+what it gates. Three rules guard it: a non-author cold read before any Review
+item, a stated default on silence for reversible picks, and one ready-to-read
+drop after the checks. It also has a documents mode for repos with no PRs or CI.
+
+The full protocol is in [references/xo-protocol.md](references/xo-protocol.md);
+the worker brief is [templates/worker-brief.md](templates/worker-brief.md).
+
 ## Hard rules
 
 - Never force-push. A rejected normal push = stop and surface it.

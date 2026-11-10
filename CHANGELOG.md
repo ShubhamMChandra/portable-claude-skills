@@ -2,6 +2,11 @@
 
 ## 2026-11
 
+- `coordinate` adds XO mode: one session is the user's only voice, workers
+  write only their own folder, thinking sessions write nothing. The user gets a
+  single queue of Decide and Review items, guarded by a non-author cold read, a
+  stated default on silence, and one ready-to-read drop. Includes a documents
+  mode for repos with no PRs or CI, and a worker brief template.
 - `teach-me` folds in the framework-first, Socratic parts of the `instructor`
   agent: a set order for explanations (one idea, picture, framework, rejected
   alternative, one Socratic question, specifics last), a rule for analogies,
